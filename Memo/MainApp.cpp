@@ -39,6 +39,11 @@ CMainWnd &CMainApp::GetMainWnd()
     return m_MainWnd ; 
 }
 
+CThreadList &CMainApp::GetThreadList() 
+{
+    return m_ThreadList ; 
+}
+
 //      setter
 
 //      static 

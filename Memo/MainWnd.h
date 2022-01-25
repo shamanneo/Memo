@@ -17,6 +17,7 @@ class CMainWnd : public CWindowImpl<CMainWnd>
             MESSAGE_HANDLER(WM_PAINT, OnPaint) 
             MESSAGE_HANDLER(WM_DESTROY, OnDestroy) 
             MESSAGE_HANDLER(WM_SIZE, OnSize)
+            MESSAGE_HANDLER(WM_KEYDOWN, OnKeyDown)
             COMMAND_CODE_HANDLER(EN_CHANGE, OnChange)
         END_MSG_MAP() 
     public :
@@ -25,6 +26,7 @@ class CMainWnd : public CWindowImpl<CMainWnd>
         LRESULT OnPaint(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL &bHandled) ;
         LRESULT OnDestroy(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL &bHandled) ;
         LRESULT OnSize(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL &bHandled) ;
+        LRESULT OnKeyDown(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL &bHandled) ;
         LRESULT OnChange(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL &bHandled) ;
     public :
         CWindow &GetEditWnd() ;
