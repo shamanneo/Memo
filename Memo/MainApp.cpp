@@ -32,6 +32,15 @@ int CMainApp::Run(HINSTANCE hInstance, int nCmdShow)
     return (int) msg.wParam ; 
 }
 
+//      getter
+
+CMainWnd &CMainApp::GetMainWnd() 
+{
+    return m_MainWnd ; 
+}
+
+//      setter
+
 //      static 
 
 CMainApp &CMainApp::GetInstance() 

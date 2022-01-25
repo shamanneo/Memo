@@ -11,6 +11,8 @@ class CMainApp
         ~CMainApp() ; 
     public :
         int Run(HINSTANCE hInstance, int nCmdShow) ; 
+    public :
+        CMainWnd &GetMainWnd() ; 
     public :    
         static CMainApp &GetInstance() ; 
         static void Release() ; 

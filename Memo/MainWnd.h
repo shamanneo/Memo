@@ -4,6 +4,7 @@ class CMainWnd : public CWindowImpl<CMainWnd>
 {
     private :
         CWindow m_EditWnd ;
+        WCHAR *m_szBuff ; 
     public :
         CMainWnd() ; 
         ~CMainWnd() ; 
@@ -25,4 +26,6 @@ class CMainWnd : public CWindowImpl<CMainWnd>
         LRESULT OnDestroy(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL &bHandled) ;
         LRESULT OnSize(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL &bHandled) ;
         LRESULT OnChange(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL &bHandled) ;
+    public :
+        CWindow &GetEditWnd() ;
 } ;
