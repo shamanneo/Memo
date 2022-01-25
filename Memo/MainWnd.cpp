@@ -52,8 +52,8 @@ LRESULT CMainWnd::OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL &bHandl
     RECT rc ; 
     GetClientRect(&rc) ; 
     rc.bottom -= 20 ; 
-    m_EditWnd.Create(_T("Edit"), m_hWnd, rc, NULL, WS_VSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | ES_MULTILINE, NULL, 1000) ; 
-    _beginthreadex(nullptr, 0, CountThread, m_szBuff, 0, nullptr) ; 
+    m_EditWnd.Create(_T("Edit"), m_hWnd, rc, NULL, WS_VSCROLL | WS_CHILD | WS_VISIBLE  | ES_MULTILINE, NULL, 1000) ; 
+    HANDLE *hThread = reinterpret_cast<HANDLE *>(_beginthreadex(nullptr, 0, CountThread, m_szBuff, 0, nullptr)) ; 
     return 0 ; 
 }
 
@@ -64,7 +64,7 @@ LRESULT CMainWnd::OnPaint(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL &bHandle
     RECT rc ; 
     GetClientRect(&rc) ; 
     CString s ; 
-    s.Format(_T("COUNT : %d"), g_nCount) ; 
+    s.Format(_T("COUNT : %d   "), g_nCount) ; 
     TextOut(hDC, 20, rc.bottom - 18, s, s.GetLength()) ; 
     EndPaint(&ps) ; 
     return 0 ; 

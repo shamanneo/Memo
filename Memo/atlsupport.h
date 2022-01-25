@@ -3,4 +3,5 @@
 
 #include <atlbase.h>
 #include <atlstr.h>
+#include <atlcoll.h>
 #include <atlwin.h>
