@@ -4,27 +4,17 @@
 
 const SIZE_T MAX = 10000000000 ; 
 INT g_nCount = 0 ; 
-INT g_bExit ; 
+INT g_nWord = 0 ; 
+bool g_bExit = false ;
 
 unsigned int __stdcall CountThread(void *pParm)
 {
-    WCHAR *szBuff = static_cast<WCHAR *>(pParm) ; 
-    HWND hEditWnd = CMainApp::GetInstance().GetMainWnd().GetEditWnd() ; 
-    HWND hMainWnd = CMainApp::GetInstance().GetMainWnd() ; 
-    RECT rc ; 
     while(true)
     {
         if(g_bExit)
         {
             break ; 
         }
-        ::GetWindowText(hEditWnd, szBuff, ::GetWindowTextLength(hEditWnd) + 1) ;
-        g_nCount = lstrlenW(szBuff) ; 
-        GetClientRect(hMainWnd, &rc) ; 
-        INT nBottom = rc.bottom - 20 ;  
-        rc.top += nBottom ;
-        InvalidateRect(hMainWnd,&rc, false) ; 
-        UpdateWindow(hMainWnd) ; 
     }
     return 0 ;
 }
@@ -52,7 +42,7 @@ LRESULT CMainWnd::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, 
     RECT rc ; 
     GetClientRect(&rc) ; 
     rc.bottom -= 20 ; 
-    m_EditWnd.Create(_T("Edit"), m_hWnd, rc, NULL, WS_VSCROLL | WS_CHILD | WS_VISIBLE  | ES_MULTILINE, NULL, 1000) ; 
+    m_EditWnd.Create(_T("Edit"), m_hWnd, rc, NULL, WS_VSCROLL | WS_CHILD | WS_VISIBLE | ES_MULTILINE, NULL, 1000) ; 
     HANDLE hThread = reinterpret_cast<HANDLE>(_beginthreadex(nullptr, 0, CountThread, m_szBuff, 0, nullptr)) ; 
     CThreadList &ThreadList = CMainApp::GetInstance().GetThreadList() ;
     ThreadList.Add(hThread) ; 
@@ -66,7 +56,7 @@ LRESULT CMainWnd::OnPaint(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, B
     RECT rc ; 
     GetClientRect(&rc) ; 
     CString s ; 
-    s.Format(_T("COUNT : %d                    "), g_nCount) ; 
+    s.Format(_T("COUNT : %d    WORD : %d                "), g_nCount, g_nWord) ; 
     TextOut(hDC, 20, rc.bottom - 18, s, s.GetLength()) ; 
     EndPaint(&ps) ; 
     return 0 ; 
@@ -76,7 +66,7 @@ LRESULT CMainWnd::OnDestroy(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/,
 {
     g_bExit = true ; 
     CThreadList &ThreadList = CMainApp::GetInstance().GetThreadList() ;
-    //ThreadList.WaitForAll() ; 
+    ThreadList.WaitForAll() ; 
     ThreadList.RemoveAll() ; 
     PostQuitMessage(0) ; 
     return 0 ; 
@@ -97,6 +87,15 @@ LRESULT CMainWnd::OnKeyDown(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/,
 
 LRESULT CMainWnd::OnChange(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL &/*bHandled*/)
 {
+    RECT rc ; 
+    HWND hEditWnd = CMainApp::GetInstance().GetMainWnd().GetEditWnd() ; 
+    HWND hMainWnd = CMainApp::GetInstance().GetMainWnd() ; 
+    ::GetWindowText(hEditWnd, m_szBuff, ::GetWindowTextLength(hEditWnd) + 1) ;
+    g_nCount = lstrlenW(m_szBuff) ; 
+    GetClientRect(&rc) ; 
+    rc.top += (rc.bottom - 20) ;
+    InvalidateRect(&rc, false) ; 
+    UpdateWindow() ; 
     return 0 ; 
 }
 
