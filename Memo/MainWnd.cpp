@@ -7,7 +7,7 @@ INT g_nCount = 0 ;
 INT g_nWord = 0 ; 
 bool g_bExit = false ;
 
-unsigned int __stdcall CountThread(void *pParm)
+unsigned int __stdcall CountThread(void */*pParm*/)
 {
     while(true)
     {
@@ -80,20 +80,23 @@ LRESULT CMainWnd::OnSize(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM lParam, BOOL &
     return 0 ; 
 }
 
-LRESULT CMainWnd::OnKeyDown(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL &/*bHandled*/)
-{
-    return 0 ;    
-}
-
 LRESULT CMainWnd::OnChange(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL &/*bHandled*/)
 {
+    g_nWord = 0 ; 
     RECT rc ; 
     HWND hEditWnd = CMainApp::GetInstance().GetMainWnd().GetEditWnd() ; 
-    HWND hMainWnd = CMainApp::GetInstance().GetMainWnd() ; 
     ::GetWindowText(hEditWnd, m_szBuff, ::GetWindowTextLength(hEditWnd) + 1) ;
     g_nCount = lstrlenW(m_szBuff) ; 
     GetClientRect(&rc) ; 
     rc.top += (rc.bottom - 20) ;
+    WCHAR *pToken = nullptr ; 
+    WCHAR *pNextToken = nullptr ; 
+    pToken = _tcstok_s(m_szBuff, _T(" "), &pNextToken) ; 
+    while(pToken != nullptr)
+    {
+        pToken = _tcstok_s(nullptr, _T(" "), &pNextToken) ; 
+        g_nWord++ ; 
+    }
     InvalidateRect(&rc, false) ; 
     UpdateWindow() ; 
     return 0 ; 

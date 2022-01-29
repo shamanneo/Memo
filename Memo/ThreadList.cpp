@@ -43,5 +43,5 @@ void CThreadList::WaitForAll()
         hThreads[nIdx++] = m_hThreads.GetNext(pos) ; 
     }
     WaitForMultipleObjects(nIdx, hThreads, TRUE, INFINITE) ; 
-    delete hThreads ; 
+    delete[] hThreads ; 
 }
