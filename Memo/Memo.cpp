@@ -10,6 +10,5 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     CMainApp &MainApp = CMainApp::GetInstance() ; 
     int nResult = MainApp.Run(hInstance, nCmdShow) ;  
     CMainApp::Release() ;
-
     return nResult ; 
 }

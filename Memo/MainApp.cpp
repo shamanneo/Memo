@@ -18,7 +18,9 @@ int CMainApp::Run(HINSTANCE hInstance, int nCmdShow)
 {
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_MEMO)) ;
     MSG msg ;
-    m_MainWnd.Create(NULL, NULL, _T("Memo"), WS_OVERLAPPEDWINDOW, 0) ; 
+
+    _U_MENUorID Menu = LoadMenu(hInstance, MAKEINTRESOURCE(IDC_MEMO)) ; 
+    m_MainWnd.Create(NULL, NULL, _T("Memo"), WS_OVERLAPPEDWINDOW, NULL, Menu) ; 
     m_MainWnd.ShowWindow(nCmdShow) ; 
     m_MainWnd.UpdateWindow() ; 
     while (::GetMessage(&msg, nullptr, 0, 0)) // main message loop.

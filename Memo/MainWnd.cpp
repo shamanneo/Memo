@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "MainApp.h"
+#include "Resource.h"
 #include "MainWnd.h"
 
 const SIZE_T MAX = 10000000000 ; 
@@ -31,9 +32,20 @@ CMainWnd::~CMainWnd()
     HeapFree(hHeap, HEAP_NO_SERIALIZE, m_szBuff) ; 
 }
 
-LRESULT CMainWnd::OnCommand(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL &bHandled) 
+LRESULT CMainWnd::OnCommand(UINT /*uMsg*/, WPARAM wParam, LPARAM /*lParam*/, BOOL &/*bHandled*/) 
 {
-    bHandled = FALSE ;
+    switch(wParam)
+    {
+        case IDM_EXIT :
+        {
+            PostMessage(WM_CLOSE) ; 
+            break ; 
+        }
+        default :
+        {
+            break ; 
+        }
+    }
     return 0 ; 
 }
 
@@ -42,7 +54,7 @@ LRESULT CMainWnd::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, 
     RECT rc ; 
     GetClientRect(&rc) ; 
     rc.bottom -= 20 ; 
-    m_EditWnd.Create(_T("Edit"), m_hWnd, rc, NULL, WS_VSCROLL | WS_CHILD | WS_VISIBLE | ES_MULTILINE, NULL, 1000) ; 
+    m_EditWnd.Create(_T("Edit"), m_hWnd, rc, NULL, WS_HSCROLL | WS_VSCROLL | WS_CHILD | WS_VISIBLE | ES_MULTILINE, NULL) ; 
     HANDLE hThread = reinterpret_cast<HANDLE>(_beginthreadex(nullptr, 0, CountThread, m_szBuff, 0, nullptr)) ; 
     CThreadList &ThreadList = CMainApp::GetInstance().GetThreadList() ;
     ThreadList.Add(hThread) ; 
