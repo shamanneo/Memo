@@ -39,6 +39,13 @@ LRESULT CMainWnd::OnCommand(UINT /*uMsg*/, WPARAM wParam, LPARAM /*lParam*/, BOO
         case IDM_EXIT :
         {
             PostMessage(WM_CLOSE) ; 
+            break ;                               
+        }
+        case IDM_NEW_PROCESS : //  »õ Ã¢
+        {
+            STARTUPINFO si { sizeof(si) } ;
+            PROCESS_INFORMATION pi ; 
+            CreateProcess(L"C:\\Projects\\Memo\\x64\\Release\\Memo.exe", nullptr, nullptr, nullptr, false, CREATE_NEW_CONSOLE, NULL, NULL, &si, &pi) ;
             break ; 
         }
         default :
