@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "MainApp.h"
 #include "Resource.h"
+#include "AboutDlg.h"
 #include "MainWnd.h"
 
 const SIZE_T MAX = 10000000000 ; 
@@ -47,6 +48,11 @@ LRESULT CMainWnd::OnCommand(UINT /*uMsg*/, WPARAM wParam, LPARAM /*lParam*/, BOO
             PROCESS_INFORMATION pi ; 
             CreateProcess(L"C:\\Projects\\Memo\\x64\\Release\\Memo.exe", nullptr, nullptr, nullptr, false, CREATE_NEW_CONSOLE, NULL, NULL, &si, &pi) ;
             break ; 
+        }
+        case IDM_ABOUT_MEMO : 
+        {
+            // AboutDlg aboutDlg; 
+            break ;  
         }
         default :
         {

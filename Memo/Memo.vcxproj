@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AboutDlg.h" />
     <ClInclude Include="atlsupport.h" />
     <ClInclude Include="MainWnd.h" />
     <ClInclude Include="framework.h" />
@@ -158,6 +159,7 @@
     <ClInclude Include="ThreadList.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AboutDlg.cpp" />
     <ClCompile Include="MainWnd.cpp" />
     <ClCompile Include="MainApp.cpp" />
     <ClCompile Include="Memo.cpp" />

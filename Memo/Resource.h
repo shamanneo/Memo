@@ -12,6 +12,7 @@
 #define IDI_SMALL                       108
 #define IDC_MEMO                        109
 #define IDM_NEW_PROCESS                 110
+#define IDM_ABOUT_MEMO                  111
 #define IDR_MAINFRAME                   128
 #define IDC_EDIT1                       1000
 #define ID_32771                        32771
@@ -28,9 +29,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        129
-#define _APS_NEXT_COMMAND_VALUE         32778
+#define _APS_NEXT_RESOURCE_VALUE        130
+#define _APS_NEXT_COMMAND_VALUE         32782
 #define _APS_NEXT_CONTROL_VALUE         1001
-#define _APS_NEXT_SYMED_VALUE           111
+#define _APS_NEXT_SYMED_VALUE           112
 #endif
 #endif
